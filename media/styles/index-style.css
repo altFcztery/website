@@ -1,0 +1,10 @@
+.content>.banner {
+    width: 100%;
+    height: 512px;
+
+    background-image: url("../images/banner.png");
+    background-size: 100%;
+
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, var(--td-color), var(--tl-color)) 30;
+}
