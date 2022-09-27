@@ -1,10 +1,126 @@
-.content>.banner {
+.content-container {
+    width: 100%;
+    height: 100%;
+}
+
+.content-container>.banner {
+    top: 0;
+    position: absolute;
     width: 100%;
     height: 512px;
 
     background-image: url("../images/banner.png");
-    background-size: 100%;
+    background-size:contain;
 
     border-bottom: 3px solid;
-    border-image: linear-gradient(90deg, var(--td-color), var(--tl-color)) 30;
+    border-image: linear-gradient(-90deg, var(--td-color), var(--tl-color)) 30;
+
+    overflow: hidden;
+}
+
+/*Timer*/
+.content-container>.banner>.timer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 301px;
+    height: 75px;
+
+    background-color: var(--td-color);
+
+    display: grid;
+}
+/*That weird triangle*/
+.content-container>.banner>.timer::before{
+    content: '';
+    display: block;
+    transform: rotate(45deg);
+    aspect-ratio: 1;
+    width:75px;
+    height:150%;
+    background-color: var(--td-color);
+    position: absolute;
+    top: 10px;
+    left: -51px;
+}
+/*Timer text*/
+.content-container>.banner>.timer>i{
+    float: left;
+    z-index: 1;
+    user-select: none;
+}
+
+.content-container>.banner>.timer>p{
+    font-size: 40px;
+    z-index: 1;
+    place-self: center;
+    user-select: none;
+}
+
+
+
+/*For animation use*/
+.banner::before,.banner::after{
+    content: "";
+    display: block;
+    position: absolute;
+    top:-50px;
+    left: -150px;
+    width: 30px;
+    height: 120%;
+    transform: rotate(20deg);
+    background-color: rgba(240, 240, 240,.2);
+    animation-iteration-count: 1 !important;
+}
+.banner:hover::before{
+    animation: bannerShine 1s infinite .2s ;
+}.banner:hover::after{
+    width: 70px;
+    background-color: rgba(240, 240, 240,.4);
+    animation: bannerShine 1.7s infinite;
+}
+
+/*Banner animation*/
+@keyframes bannerShine{
+    from {left:-100px;}
+    to{left:120%;}
+}
+
+.content-container>.contents {
+    top: 100px;
+
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(2, 50%);
+    place-items: center;
+}
+
+/*About us Section*/
+.contents>.about-container {
+    background-color: var(--bg-light);
+    width: 80%;
+    height: 50%;
+    padding: 10px;
+
+    border-radius: 10px;
+    box-shadow: 8px 8px 24px 0px var(--bg-dark);
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.contents>.about-container>h1 {
+    font-weight: 400;
+    border-bottom: 1px solid var(--text-color);
+}
+
+.contents>.about-container>p {
+    text-align:justify;
+    padding:15px;
 }
