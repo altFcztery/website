@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap');
+
 :root {
     color-scheme: dark;
 
-    --bg-color: #212121;
+    --bg-color: #121212;
+    --bg-light: #171717;
+    --bg-dark: #101010;
+    --bg-transparent: rgba(33, 33, 33, .9);
     --text-color: #EFEFEF;
     --fl-color: #feff00;
     --fd-color: #feb64e;
@@ -12,15 +17,15 @@
 }
 
 /*Delete later*/
-body{
+body {
     height: 150vh;
 }
 
 * {
     box-sizing: border-box;
-    font-family: calibri;
+    font-family: 'Roboto', calibri;
+    font-weight: 100;
 
-    background-color: var(--bg-color);
     color: var(--text-color);
 
     margin: 0;
@@ -35,7 +40,7 @@ body{
     height: 100px;
     padding-inline: 50px;
 
-    top:0;
+    top: 0;
     position: sticky;
     z-index: 999;
 
@@ -46,15 +51,17 @@ body{
 
     letter-spacing: 2px;
 
-    border-bottom: 5px solid;
-    border-image: linear-gradient(45deg, var(--td-color), var(--tl-color), var(--fl-color), var(--fd-color), var(--sl-color), var(--sd-color)) 30;
+    background-color: var(--bg-transparent);
+
+    /*border-bottom: 5px solid;
+    border-image: linear-gradient(45deg, var(--td-color), var(--tl-color), var(--fl-color), var(--fd-color), var(--sl-color), var(--sd-color)) 30;*/
 }
 
-.topbar>.btt-container{
+.topbar>.btt-container {
     padding-inline: 15px;
     margin-left: auto;
 
-    justify-self: baseline; 
+    justify-self: baseline;
 
     display: flex;
     flex-direction: row;
@@ -62,16 +69,16 @@ body{
     gap: 20px;
 }
 
-.topbar>.btt-container>a>.button{
+.topbar>.btt-container>a>.button {
     width: 225px;
     height: 65px;
 
-    display:grid;
+    display: grid;
     place-items: center;
 
     border-bottom: 1px solid var(--text-color);
 
-    font-size:125%;
+    font-size: 125%;
     transition: .3s;
 
     user-select: none;
@@ -79,8 +86,7 @@ body{
     /*Jakas animacja po hoverze by sie przydala*/
 }
 
-.topbar>.btt-container>a>.button:hover{
+.topbar>.btt-container>a>.button:hover {
     border-bottom: 2px solid var(--text-color);
     letter-spacing: 3px;
-    font-weight: bolder;
 }
