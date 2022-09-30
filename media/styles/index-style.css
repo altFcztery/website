@@ -10,7 +10,7 @@
     height: 512px;
 
     background-image: url("../images/banner.png");
-    background-size:contain;
+    background-size: contain;
 
     border-bottom: 3px solid;
     border-image: linear-gradient(-90deg, var(--td-color), var(--tl-color)) 30;
@@ -19,7 +19,7 @@
 }
 
 /*Timer*/
-.content-container>.banner>.timer{
+.content-container>.banner>.timer {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -31,60 +31,79 @@
 
     display: grid;
 }
+
 /*That weird triangle*/
-.content-container>.banner>.timer::before{
+.content-container>.banner>.timer::before {
     content: '';
     display: block;
-    transform: rotate(45deg);
-    aspect-ratio: 1;
-    width:75px;
-    height:150%;
-    background-color: var(--td-color);
+
     position: absolute;
     top: 10px;
     left: -51px;
+
+    width: 75px;
+    height: 150%;
+
+    background-color: var(--td-color);
+    transform: rotate(45deg);
 }
+
 /*Timer text*/
-.content-container>.banner>.timer>i{
+.content-container>.banner>.timer>i {
     float: left;
+
     z-index: 1;
     user-select: none;
 }
 
-.content-container>.banner>.timer>p{
+.content-container>.banner>.timer>p {
+    place-self: center;
+
     font-size: 40px;
     z-index: 1;
-    place-self: center;
     user-select: none;
 }
 
 
 
 /*For animation use*/
-.banner::before,.banner::after{
+.banner::before,
+.banner::after {
     content: "";
     display: block;
+
     position: absolute;
-    top:-50px;
+    top: -50px;
     left: -150px;
+    transform: rotate(20deg);
+
     width: 30px;
     height: 120%;
-    transform: rotate(20deg);
-    background-color: rgba(240, 240, 240,.2);
+    background-color: rgba(240, 240, 240, .2);
+
     animation-iteration-count: 1 !important;
 }
-.banner:hover::before{
-    animation: bannerShine 1s infinite .2s ;
-}.banner:hover::after{
-    width: 70px;
-    background-color: rgba(240, 240, 240,.4);
+
+.banner:hover::before {
+    animation: bannerShine 1s infinite .2s;
+}
+
+.banner:hover::after {
     animation: bannerShine 1.7s infinite;
+
+    width: 70px;
+    background-color: rgba(240, 240, 240, .4);
 }
 
 /*Banner animation*/
-@keyframes bannerShine{
-    from {left:-100px;}
-    to{left:120%;}
+@keyframes bannerShine {
+    from {
+        left: -100px;
+    }
+
+    to {
+        left: 120%;
+    }
 }
 
 .content-container>.contents {
@@ -95,8 +114,7 @@
     padding: 50px;
 
     display: grid;
-    grid-template-columns: repeat(2, 50%);
-    grid-template-rows: repeat(2, 50%);
+    grid-template-rows: 45% 55%;
     place-items: center;
 }
 
@@ -104,7 +122,6 @@
 .contents>.about-container {
     background-color: var(--bg-light);
     width: 80%;
-    height: 50%;
     padding: 10px;
 
     border-radius: 10px;
@@ -121,6 +138,78 @@
 }
 
 .contents>.about-container>p {
-    text-align:justify;
-    padding:15px;
+    text-align: justify;
+    padding: 15px;
+}
+
+/*Offers Section*/
+.offers-container {
+    width: 100%;
+    height: 100%;
+    margin-top: -250px;
+
+    grid-column: 1 / span 2;
+    grid-row: 2;
+
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 7% auto;
+}
+
+.offers-container>a {
+    border-bottom: 1px solid var(--text-color);
+}
+
+.offers-container>.offers {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: 100%;
+    gap: 90px;
+    align-self: center;
+}
+
+.offers-container>.offers>.offer {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 20px;
+
+    background-color: var(--bg-light);
+    box-shadow: 8px 8px 24px 0px var(--bg-dark);
+    border-radius: 10px;
+
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    transition: .5s;
+    cursor: pointer;
+}
+
+.offers-container>.offers>.offer:hover {
+    transform: scale(1.07);
+}
+
+.offers-container>.offers>.offer>a>.offer-button {
+    margin-top: 20px;
+    padding: 10px;
+
+    display: grid;
+    align-self: flex-end;
+    place-items: center;
+
+    border-radius: 8px;
+    border: 1px solid var(--text-color);
+
+    cursor: pointer;
+    transition: .3s;
+}
+
+.offers-container>.offers>.offer>a>.offer-button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-light);
 }
