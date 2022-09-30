@@ -169,11 +169,12 @@
     grid-template-rows: 100%;
     gap: 90px;
     align-self: center;
+    place-items: center;
 }
 
 .offers-container>.offers>.offer {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin-top: 20px;
     padding: 20px;
 
