@@ -15,7 +15,7 @@ function formTime(t){
 	return [d,pad(h),pad(m),pad(s)].join(":");
 }
 function timerUpdate(){
-	let label=document.getElementsByClassName("timer")[0].childNodes[4];
+	let label=document.getElementsByClassName("timer")[0].childNodes[3];
 	let dateA=new Date("September 22, 2022 10:00:00");
 	let diff=(Date.now()-dateA.getTime());
 	label.innerHTML=formTime(diff);
