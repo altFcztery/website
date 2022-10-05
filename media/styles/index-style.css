@@ -151,9 +151,8 @@
     grid-column: 1 / span 2;
     grid-row: 2;
 
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 7% auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .offers-container>a {
@@ -162,14 +161,13 @@
 
 .offers-container>.offers {
     width: 100%;
-    height: 100%;
+    flex:1;
 
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-template-rows: 100%;
+    display: flex;
+    justify-content:space-evenly;
+
     gap: 90px;
     align-self: center;
-    place-items: center;
 }
 
 .offers-container>.offers>.offer {
@@ -193,6 +191,12 @@
 
 .offers-container>.offers>.offer:hover {
     transform: scale(1.07);
+}
+
+.offers-container>.offers>.offer>.price {
+    color: var(--td-color);
+    font-size: 105%;
+    font-weight: bold;
 }
 
 .offers-container>.offers>.offer>a>.offer-button {
