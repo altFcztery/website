@@ -83,10 +83,9 @@ body {
     transition: .3s;
 
     user-select: none;
-    cursor: pointer;
-    /*Jakas animacja po hoverze by sie przydala*/
+    cursor: pointer; 
 }
-
+/*animacja do poprawy*/
 .topbar>.btt-container>a>.button:hover {
     border-bottom: 2px solid var(--text-color);
     letter-spacing: 3px;
