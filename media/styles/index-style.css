@@ -115,6 +115,7 @@
 
     display: grid;
     grid-template-rows: 45% 55%;
+    grid-template-columns: 50% 50%;
     place-items: center;
 }
 
@@ -173,6 +174,7 @@
 .offers-container>.offers>.offer {
     width: 100%;
     max-width: 500px;
+    min-width: 400px;
     margin-top: 20px;
     padding: 20px;
 
