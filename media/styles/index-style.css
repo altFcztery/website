@@ -10,7 +10,7 @@
     height: 512px;
 
     background-image: url("../images/banner.png");
-    background-size: contain;
+    background-size: cover;
 
     border-bottom: 3px solid;
     border-image: linear-gradient(-90deg, var(--td-color), var(--tl-color)) 30;
@@ -114,9 +114,11 @@
     padding: 50px;
 
     display: grid;
-    grid-template-rows: 45% 55%;
+    grid-template-rows: minmax(400px, 400px) repeat(2, auto);
     grid-template-columns: 50% 50%;
-    place-items: center;
+    place-items: top;
+
+    gap: 25px;
 }
 
 /*About us Section*/
@@ -131,6 +133,7 @@
 
     display: flex;
     flex-direction: column;
+    place-self: center;
 }
 
 .contents>.about-container>h1 {
@@ -146,8 +149,7 @@
 /*Offers Section*/
 .offers-container {
     width: 100%;
-    height: 100%;
-    margin-top: -250px;
+    height: fit-content;
 
     grid-column: 1 / span 2;
     grid-row: 2;
@@ -162,10 +164,10 @@
 
 .offers-container>.offers {
     width: 100%;
-    flex:1;
+    flex: 1;
 
     display: flex;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
 
     gap: 90px;
     align-self: center;
@@ -219,4 +221,16 @@
 .offers-container>.offers>.offer>a>.offer-button:hover {
     background-color: var(--text-color);
     color: var(--bg-light);
+}
+
+.contact-container {
+    width: 100%;
+    height: fit-content;
+
+    grid-row: 3;
+    grid-column: 1 / span 2;
+}
+
+.contact-container>a>h1 {
+    border-bottom: 1px solid var(--text-color);
 }

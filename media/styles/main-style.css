@@ -17,11 +17,6 @@
     --td-color: #008bdc;
 }
 
-/*Delete later*/
-body {
-    height: 150vh;
-}
-
 * {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;

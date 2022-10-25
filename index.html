@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Links-->
-    <link rel="stylesheet" href="media/styles/main-style.css">
+    <link rel="stylesheet" href="media/styles/main-style.css" async>
     <link rel="stylesheet" href="media/styles/index-style.css">
     <link rel="shortcut icon" href="media/images/favicon.png" type="image/x-icon">
     <!--Other-->
-    <script src="scripts/jQuery-3.6.1.min.js"></script>
-    <script src="scripts/index.js"></script>
+    <script src="scripts/jQuery-3.6.1.min.js" async></script>
+    <script src="scripts/index.js" defer></script>
     <title>AltF4</title>
 </head>
 
@@ -22,10 +22,10 @@
         <img src="media/images/logo.png" alt="[ LOGO ]" class="logo">
         <!--Topbar Buttons-->
         <div class="btt-container">
-            <a href="">
+            <a href="#kontakt">
                 <div class="button">Kontakt</div>
             </a>
-            <a href="#offers">
+            <a href="#oferta">
                 <div class="button">Oferta</div>
             </a>
             <a href="">
@@ -53,12 +53,13 @@
                     perspiciatis provident. Ab, hic.</p>
             </div>
 
-            <div class="offers-container" id="offers">
-                <a href="#offers">
+            <div class="offers-container" id="oferta">
+                <a href="#oferta">
                     <h1>Oferta:</h1>
                 </a>
                 <div class="offers">
-                    <div class="offer">
+                    <script type="module" src="scripts/offers.js" async></script>
+                    <!--<div class="offer">
                         <h2>PlaceHolder</h2>
                         <img src="https://place-hold.it/512x512">
                         <p class="price">od NaN</p>
@@ -70,32 +71,14 @@
                         <a>
                             <div class="offer-button">See more...</div>
                         </a>
-                    </div>
-                    <div class="offer">
-                        <h2>PlaceHolder</h2>
-                        <img src="https://place-hold.it/512x512">
-                        <p class="price">od NaN</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae at sequi qui perferendis
-                            voluptas corrupti culpa, odio alias cum porro soluta vitae illum molestiae dolores minima
-                            voluptatibus beatae, eveniet itaque? Molestias quo eaque quia est nulla. Ipsa, itaque nulla
-                            minima ullam, molestiae, fuga ut tempora accusantium sunt maiores neque alias?</p>
-                        <a>
-                            <div class="offer-button">See more...</div>
-                        </a>
-                    </div>
-                    <div class="offer">
-                        <h2>PlaceHolder</h2>
-                        <img src="https://place-hold.it/512x512">
-                        <p class="price">od NaN</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae at sequi qui perferendis
-                            voluptas corrupti culpa, odio alias cum porro soluta vitae illum molestiae dolores minima
-                            voluptatibus beatae, eveniet itaque? Molestias quo eaque quia est nulla. Ipsa, itaque nulla
-                            minima ullam, molestiae, fuga ut tempora accusantium sunt maiores neque alias?</p>
-                        <a>
-                            <div class="offer-button">See more...</div>
-                        </a>
-                    </div>
+                    </div>-->
                 </div>
+            </div>
+            <div class="contact-container" id="kontakt">
+                <a href="#kontakt">
+                    <h1>Kontakt:</h1>
+                </a>
+
             </div>
         </div>
     </div>
