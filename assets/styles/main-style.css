@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap');
+
+:root {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+
+    --bg-color: #121212;
+    --bg-light: #171717;
+    --bg-dark: #101010;
+    --bg-transparent: rgba(33, 33, 33, .9);
+    --text-color: #EFEFEF;
+    --fl-color: #feff00;
+    --fd-color: #feb64e;
+    --sl-color: #ff6079;
+    --sd-color: #ff1e5f;
+    --tl-color: #01f8e3;
+    --td-color: #008bdc;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+
+    color: var(--text-color);
+
+    margin: 0;
+    padding: 0;
+
+    text-decoration: none;
+}
+
+/*Topbar style*/
+.topbar {
+    width: 100%;
+    height: 100px;
+    padding-inline: 50px;
+
+    top: 0;
+    position: sticky;
+    z-index: 999;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+    letter-spacing: 2px;
+
+    background-color: var(--bg-transparent);
+
+    /*border-bottom: 5px solid;
+    border-image: linear-gradient(45deg, var(--td-color), var(--tl-color), var(--fl-color), var(--fd-color), var(--sl-color), var(--sd-color)) 30;*/
+}
+
+.topbar>.btt-container {
+    padding-inline: 15px;
+    margin-left: auto;
+
+    justify-self: baseline;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.topbar>.btt-container>a>.button {
+    width: 225px;
+    height: 65px;
+
+    display: grid;
+    place-items: center;
+
+    border-bottom: 1px solid var(--text-color);
+
+    font-size: 125%;
+    transition: .3s;
+
+    user-select: none;
+    cursor: pointer; 
+}
+/*animacja do poprawy*/
+.topbar>.btt-container>a>.button:hover {
+    border-bottom: 2px solid var(--text-color);
+    letter-spacing: 3px;
+}
