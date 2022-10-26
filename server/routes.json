@@ -1,8 +1,0 @@
-[
-    {
-        "name": "index",
-        "route": "/",
-        "template": "templates/index.html",
-        "perrmissions": null
-    }
-]
