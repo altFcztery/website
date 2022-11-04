@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env.local' });
 require('dotenv').config();
 const http = require('http');
 const path = require('path');
@@ -49,6 +50,9 @@ http.createServer((req, res) => {
     });
 }).listen(process.env.SERVER_PORT, () => { console.log('Listening for requests at port: ' + process.env.SERVER_PORT); });
 
+/**
+ * Setting heders for assets by extension
+ */
 function getHeaderType(ext) {
     switch (ext) {
         case ".png":
@@ -60,6 +64,9 @@ function getHeaderType(ext) {
             break;
         case ".js":
             contentType = "application/javascript"
+            break;
+        case ".json":
+            contentType = "application/json"
             break;
     }
     return contentType;

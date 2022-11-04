@@ -13,7 +13,7 @@
     background-size: cover;
 
     border-bottom: 3px solid;
-    border-image: linear-gradient(-90deg, var(--td-color), var(--tl-color)) 30;
+    border-image: linear-gradient(-90deg, var(--accent-blue-dark), var(--accent-blue-light)) 30;
 
     overflow: hidden;
 }
@@ -27,7 +27,7 @@
     width: 301px;
     height: 75px;
 
-    background-color: var(--td-color);
+    background-color: var(--accent-blue-dark);
 
     display: grid;
 }
@@ -44,7 +44,7 @@
     width: 75px;
     height: 150%;
 
-    background-color: var(--td-color);
+    background-color: var(--accent-blue-dark);
     transform: rotate(45deg);
 }
 
@@ -198,13 +198,13 @@
 }
 
 .offers-container>.offers>.offer>.price {
-    color: var(--td-color);
+    color: var(--accent-blue-dark);
     font-size: 105%;
     font-weight: bold;
 }
 
 .offers-container>.offers>.offer>a>.offer-button {
-    margin-top: 20px;
+    margin-top: auto;
     padding: 10px;
 
     display: grid;
@@ -215,6 +215,7 @@
     border: 1px solid var(--text-color);
 
     cursor: pointer;
+    user-select: none;
     transition: .3s;
 }
 
