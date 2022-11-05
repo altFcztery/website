@@ -4,6 +4,8 @@ const http = require('http');
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
+const cheerio = require('cheerio');
+const components = require(path.join(__dirname, "components/_components.js"))
 
 const ROUTES = JSON.parse(fs.readFileSync("config/routes.json"));
 
@@ -21,7 +23,9 @@ http.createServer((req, res) => {
     if (!!route) {
         console.log("Rendering route: " + route.name);
         fs.readFile(route.template, ((err, content) => {
-            res.end(content);
+            const HTML = cheerio.load(content);
+            HTML("component").replaceWith(new components.Component(HTML("component").attr("type")).template);
+            res.end(HTML.html());
         }))
         return;
     }
