@@ -1,0 +1,11 @@
+[
+    {
+        "name": "topbar",
+        "type": "topbar",
+        "files": "./_topbar.component"
+    },{
+        "name": "timer",
+        "type": "timer",
+        "files": "./timer.component"
+    }
+]
