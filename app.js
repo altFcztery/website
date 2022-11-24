@@ -24,7 +24,7 @@ http.createServer((req, res) => {
         console.log("Rendering route: " + route.name);
         fs.readFile(route.template, ((err, content) => {
             const HTML = cheerio.load(content);
-            HTML("component").replaceWith(function () {console.log(new components.Component(HTML(this).attr("type")).template); return new components.Component(HTML(this).attr("type")).template });
+            HTML("component").replaceWith(function () { return new components.Component(HTML(this).attr("type"), HTML(this).data()).template });
             res.end(HTML.html());
         }))
         return;
