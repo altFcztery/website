@@ -4,8 +4,10 @@ const http = require('http');
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
+const cheerio = require('cheerio');
+const components = require(path.join(__dirname, "app/scripts/components.js"))
 
-const ROUTES = JSON.parse(fs.readFileSync("config/routes.json"));
+const ROUTES = JSON.parse(fs.readFileSync(path.join(__dirname, "app/config/routes.json")));
 
 /**
  * Creating server
@@ -21,33 +23,29 @@ http.createServer((req, res) => {
     if (!!route) {
         console.log("Rendering route: " + route.name);
         fs.readFile(route.template, ((err, content) => {
-            res.end(content);
+            const HTML = cheerio.load(content);
+            HTML("component").replaceWith(function () { return new components.Component(HTML(this).attr("type"), HTML(this).data()).template });
+            res.end(HTML.html());
         }))
         return;
     }
     /**
      * Serving assets
      */
-    var filePath = path.join(__dirname, action).split("%20").join(" ");
-    fs.exists(filePath, function (exists) {
-        if (!exists) {
-            console.log(filePath);
-            res.writeHead(404, {
-                "Content-Type": contentType,
-            });
-            res.end("404 Not Found");
-            return;
-        }
-        var ext = path.extname(action);
-
-        res.writeHead(200, {
-            "Content-Type": getHeaderType(ext)
-        });
-        fs.readFile(filePath,
-            function (err, content) {
-                res.end(content);
-            });
+    res.writeHead(200, {
+        "Content-Type": getHeaderType(path.extname(action))
     });
+    fs.readFile(path.join(__dirname, `./src/${action}`),
+        function (err, content) {
+            if (err) {
+                res.writeHead(404, {
+                    "Content-Type": contentType,
+                });
+                res.end("404 Not Found");
+                return;
+            }
+            res.end(content);
+        });
 }).listen(process.env.SERVER_PORT, () => { console.log('Listening for requests at port: ' + process.env.SERVER_PORT); });
 
 /**

@@ -1,0 +1,6 @@
+{
+    "logo": {
+            "full": "<img src=\"assets/images/logo.png\" alt=\"[ LOGO ]\" class=\"logo\">",
+            "min": "<img src=\"assets/images/logo-min.png\" type=\"image/svg\" alt=\"[ LOGO ]\" class=\"logo\">"
+    }
+}

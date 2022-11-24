@@ -6,44 +6,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Links    -->
-    <link rel="stylesheet" href="assets/styles/main-style.css" async>
-    <link rel="stylesheet" href="assets/styles/index-style.css">
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <!--Links    
+        <link rel="stylesheet" href="assets/styles/_global-style.css" async>
+    -->
+    <link rel="stylesheet" href="assets/styles/new-index-style.css">
+    <link rel="shortcut icon" href="assets/images/logo-min.png" type="image/x-icon">
     <!--Other-->
-    <script src="assets/scripts/jQuery-3.6.1.min.js" async></script>
-    <script src="assets/scripts/timer.js" defer></script>
     <title>AltF4</title>
 </head>
 
 <body>
     <!--Topbar-->
-    <div class="topbar">
-        <a href="#"><img src="assets/images/logo.png" alt="[ LOGO ]" class="logo"></a>
-        <!--Topbar Buttons-->
-        <div class="btt-container">
-            <a href="#kontakt">
-                <div class="button">Kontakt</div>
-            </a>
-            <a href="#oferta">
-                <div class="button">Oferta</div>
-            </a>
-            <a href="">
-                <div class="button">Zaloguj się</div>
-            </a>
-        </div>
-    </div>
+    <component type="_topbar" data-logo="min"></component>
     <!--Rest of page-->
-    <div class="content-container">
+    <main class="content-container">
         <!--Banner-->
-        <div class="banner">
+        <banner class="banner">
             <div class="timer">
                 <i>Jesteśmy firmą już od:</i>
                 <p>--:--:--:--</p>
             </div>
-        </div>
-        <div class="contents">
-            <div class="about-container">
+        </banner>
+        <main class="contents">
+            <article class="about-container">
                 <h1>O nas</h1>
                 <!--Opis tutaj jakis dac pozniej-->
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla harum maiores architecto fuga id
@@ -51,8 +36,7 @@
                     necessitatibus qui! Reprehenderit reiciendis iusto laborum natus numquam dolore eveniet culpa
                     quaerat ipsum asperiores voluptatem consequatur, distinctio alias facere consectetur nesciunt soluta
                     perspiciatis provident. Ab, hic.</p>
-            </div>
-
+            </article>
             <div class="offers-container" id="oferta">
                 <a href="#oferta">
                     <h1>Oferta:</h1>
@@ -61,17 +45,18 @@
                     <script type="module" src="assets/scripts/offers.js" async></script>
                 </div>
             </div>
-            <div class="contact-container" id="kontakt">
+            <article class="contact-container" id="kontakt">
                 <a href="#kontakt">
                     <h1>Kontakt:</h1>
                 </a>
-
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        
-    </div>
+            </article>
+        </main>
+    </main>
+    <!--Footer-->
+    <component type="_footer"></component>
+    <!--Scripts-->
+    <script src="assets/scripts/jQuery-3.6.1.min.js" async></script>
+    <script src="assets/scripts/timer.js" defer></script>
 </body>
 
 </html>
