@@ -5,9 +5,9 @@ const path = require('path');
 const fs = require('fs');
 const url = require('url');
 const cheerio = require('cheerio');
-const components = require(path.join(__dirname, "components/_components.js"))
+const components = require(path.join(__dirname, "app/scripts/components.js"))
 
-const ROUTES = JSON.parse(fs.readFileSync("config/routes.json"));
+const ROUTES = JSON.parse(fs.readFileSync(path.join(__dirname, "app/config/routes.json")));
 
 /**
  * Creating server
@@ -32,26 +32,20 @@ http.createServer((req, res) => {
     /**
      * Serving assets
      */
-    var filePath = path.join(__dirname, action).split("%20").join(" ");
-    fs.exists(filePath, function (exists) {
-        if (!exists) {
-            console.log(filePath);
-            res.writeHead(404, {
-                "Content-Type": contentType,
-            });
-            res.end("404 Not Found");
-            return;
-        }
-        var ext = path.extname(action);
-
-        res.writeHead(200, {
-            "Content-Type": getHeaderType(ext)
-        });
-        fs.readFile(filePath,
-            function (err, content) {
-                res.end(content);
-            });
+    res.writeHead(200, {
+        "Content-Type": getHeaderType(path.extname(action))
     });
+    fs.readFile(path.join(__dirname, `./src/${action}`),
+        function (err, content) {
+            if (err) {
+                res.writeHead(404, {
+                    "Content-Type": contentType,
+                });
+                res.end("404 Not Found");
+                return;
+            }
+            res.end(content);
+        });
 }).listen(process.env.SERVER_PORT, () => { console.log('Listening for requests at port: ' + process.env.SERVER_PORT); });
 
 /**

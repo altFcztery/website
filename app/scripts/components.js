@@ -13,10 +13,9 @@ class Component {
             .map(dirent => dirent.name)
             .find(e => e == this.type);
         if (!!component) {
-            if (!fs.existsSync(path.join(__dirname, this.type + "/renderer.js")))
-                return fs.readFileSync(path.join(__dirname, this.type + "/template.html"), "utf8");
-            //TODO: Custom rendering for components
-            const CONTROLLER = require(path.join(__dirname, this.type + "/renderer.js"))
+            if (!fs.existsSync(path.join(__dirname, `../../src/components/${this.type}/renderer.js`)))
+                return fs.readFileSync(path.join(__dirname, `../../src/components/${this.type}/template.html`), "utf8");
+            const CONTROLLER = require(path.join(__dirname, `../../src/components/${this.type}/renderer.js`))
             return new CONTROLLER.Renderer(this.data).template
         }
     }

@@ -2,7 +2,7 @@
     {
         "name": "index",
         "route": "/",
-        "template": "templates/index.html",
+        "template": "src/templates/index.html",
         "perrmissions": null
     }
 ]
