@@ -8,14 +8,14 @@ class Component {
     }
 
     get template() {
-        let component = fs.readdirSync(__dirname, { withFileTypes: true })
+        let component = fs.readdirSync(path.join(__dirname, '../../src/components'),{ withFileTypes: true })
             .filter(dirent => dirent.isDirectory())
             .map(dirent => dirent.name)
             .find(e => e == this.type);
         if (!!component) {
-            if (!fs.existsSync(path.join(__dirname, `../../src/components/${this.type}/renderer.js`)))
+            if (!fs.existsSync(path.join(__dirname, `../../src/components/${this.type}/controller.js`)))
                 return fs.readFileSync(path.join(__dirname, `../../src/components/${this.type}/template.html`), "utf8");
-            const CONTROLLER = require(path.join(__dirname, `../../src/components/${this.type}/renderer.js`))
+            const CONTROLLER = require(path.join(__dirname, `../../src/components/${this.type}/controller.js`))
             return new CONTROLLER.Renderer(this.data).template
         }
     }

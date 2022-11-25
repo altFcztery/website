@@ -12,7 +12,6 @@ class Renderer {
         const HTML = cheerio.load(fs.readFileSync(path.join(__dirname, 'template.html')));
         for (const key of Object.keys(this.data)) {
             HTML(key).replaceWith(CONFIG[key][this.data[key]]);
-            console.log(CONFIG[key][this.data[key]])
         }
         return HTML.html();
     }
