@@ -57,7 +57,7 @@ http.createServer((req, res) => {
         database: process.env.DB_DATABASE
     })
     conn.connect(function (err) {
-        if (err) console.log(err);
+        if (err) { logger.log(err.sqlMessage, "ERROR"); return }
         logger.log('Connected to database!')
     });
 });
@@ -102,4 +102,4 @@ client.on('ready', () => {
 /**
  * Must stay at the bottom of the script
  */
-client.login(process.env.DISCORD_TOKEN);
+if (!!process.env.DISCORD_TOKEN) client.login(process.env.DISCORD_TOKEN);
