@@ -5,12 +5,13 @@ const path = require('path');
 const fs = require('fs');
 const url = require('url');
 const cheerio = require('cheerio');
-const mysql = require('mysql');
 const components = require(path.join(__dirname, "app/scripts/components.js"))
 const loggerModule = require(path.join(__dirname, "app/scripts/logger.js"))
+const connection = require(path.join(__dirname, "app/scripts/connection.js"))
 
 const logger = new loggerModule.Logger()
 const ROUTES = JSON.parse(fs.readFileSync(path.join(__dirname, "app/config/routes.json")));
+
 /**
  * Creating server
  */
@@ -27,6 +28,7 @@ http.createServer((req, res) => {
         fs.readFile(route.template, ((err, content) => {
             const HTML = cheerio.load(content);
             HTML("component").replaceWith(function () { return new components.Component(HTML(this).attr("type"), HTML(this).data()).template });
+            HTML("connection").replaceWith(function () { return "WIP"})
             res.end(HTML.html());
         }))
         return;
@@ -50,16 +52,6 @@ http.createServer((req, res) => {
         });
 }).listen(process.env.SERVER_PORT, () => {
     logger.log('Listening for requests at port: ' + process.env.SERVER_PORT);
-    const conn = mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: process.env.DB_DATABASE
-    })
-    conn.connect(function (err) {
-        if (err) { logger.log(err.sqlMessage, "ERROR"); return }
-        logger.log('Connected to database!')
-    });
 });
 
 /**

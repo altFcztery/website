@@ -34,7 +34,7 @@
         </svg>
     </banner>
     <main class="content-container">
-        <main class="contents">
+        <section class="contents">
             <article class="about-container">
                 <h1>O nas</h1>
                 <!--Opis tutaj jakis dac pozniej-->
@@ -49,6 +49,23 @@
                     <h1>Oferta:</h1>
                 </a>
                 <div class="offers">
+                    <connection query="SELECT * FROM `offers`">
+                        <div class="offer">
+                            <h2>
+                                <name></name>
+                            </h2>
+                            <img src="${offers.offers[nb-1].image}">
+                            <p class="price">
+                                <price></price>
+                            </p>
+                            <p>
+                                <description></description>
+                            </p>
+                            <a>
+                                <div class="offer-button">See more...</div>
+                            </a>
+                        </div>
+                    </connection>
                     <script type="module" src="assets/scripts/offers.js" async></script>
                 </div>
             </div>
@@ -57,7 +74,7 @@
                     <h1>Kontakt:</h1>
                 </a>
             </article>
-        </main>
+        </section>
     </main>
     <!--Footer-->
     <component type="_footer"></component>
