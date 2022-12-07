@@ -8,7 +8,7 @@ Date.prototype.today = function () {
 
 // For the time now
 Date.prototype.timeNow = function () {
-    return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
+    return ((this.getHours() < 10) ? "0" : "") + this.getHours() + "." + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + "." + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
 }
 
 Date.prototype.now = function () {
@@ -18,7 +18,6 @@ Date.prototype.now = function () {
 class Logger {
     constructor() {
         this.timestamp = new Date().now().replace(":", ".")
-        this.log("Started logging!")
     }
     log(message, type = "MESSAGE") {
         let mess = `[${new Date().timeNow()}.${new Date().getMilliseconds()}] [${type}]: ${message}`

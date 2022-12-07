@@ -17,12 +17,15 @@ const ROUTES = JSON.parse(fs.readFileSync(path.join(__dirname, "app/config/route
  */
 http.createServer((req, res) => {
     let request = url.parse(req.url, true);
-    var action = request.pathname;
+    let pathname = request.pathname;
     /**
      * Handling routes
      */
-    let route = ROUTES.find(e => e.route === action);
     let contentType = "text/html";
+    let route = ROUTES.find(e => e.route === pathname);
+    res.writeHead(200, {
+        "Content-Type": getHeaderType(path.extname(pathname))
+    });
     if (!!route) {
         logger.log("Rendering route: " + route.name);
         fs.readFile(route.template, ((err, content) => {
@@ -47,10 +50,7 @@ http.createServer((req, res) => {
     /**
      * Serving assets
      */
-    res.writeHead(200, {
-        "Content-Type": getHeaderType(path.extname(action))
-    });
-    fs.readFile(path.join(__dirname, `./src/${action}`),
+    fs.readFile(path.join(__dirname, `./src/${pathname}`),
         function (err, content) {
             if (err) {
                 res.writeHead(404, {
@@ -83,6 +83,8 @@ function getHeaderType(ext) {
         case ".json":
             contentType = "application/json"
             break;
+        default:
+            contentType = "text/html"
     }
     return contentType;
 }
