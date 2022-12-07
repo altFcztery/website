@@ -27,8 +27,19 @@ http.createServer((req, res) => {
         logger.log("Rendering route: " + route.name);
         fs.readFile(route.template, ((err, content) => {
             const HTML = cheerio.load(content);
-            HTML("component").replaceWith(function () { return new components.Component(HTML(this).attr("type"), HTML(this).data()).template });
-            HTML("connection").replaceWith(function () { return "WIP"})
+            /**
+             * Rendering components
+             */
+            HTML("component").replaceWith(function () {
+                return new components.Component(HTML(this).attr("type"), HTML(this).data()).template
+            });
+            /**
+             * Database connection
+             */
+            HTML("connection").replaceWith(function () {
+                return new connection.Conn(HTML(this).attr("query"))
+                    .connectionHtml(HTML(this).html());
+            });
             res.end(HTML.html());
         }))
         return;

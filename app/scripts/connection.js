@@ -1,29 +1,34 @@
 require('dotenv').config({ path: '.env.local' });
 require('dotenv').config();
 const cheerio = require('cheerio');
-const mysql = require('mysql');
+const syncSql = require('sync-sql');
+const path = require('path');
+const loggerModule = require(path.join(__dirname, "./logger.js"))
+const logger = new loggerModule.Logger()
 
 class Conn {
     constructor(query) {
         this.query = query
-        this.conn = mysql.createConnection({
+        this.conn = {
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
             password: process.env.DB_PASS,
             database: process.env.DB_DATABASE
-        })
+        }
     }
-    connectionHtml(html,callback) {
+    connectionHtml(html) {
         const HTML = cheerio.load(html);
-        let query = HTML("connection").getAttribute("query");
-        this.conn.connect(function (err) {
-            if (err) { logger.log(err, "ERROR"); return }
-            conn.query(query,function (err, result, fields){
-                if (err) { logger.log(err.sqlMessage, "ERROR"); return }
-                console.log(result)
-            })
-        });
-        return HTML.html();
+        let result = syncSql.mysql(this.conn,this.query)
+        logger.log(`New database query: "${this.query}"`)
+        let resultHtml = "";
+        for (const res of result.data.rows) {
+            let tempHtml = HTML;
+            for (const key of Object.keys(res)) {
+                tempHtml(key).replaceWith(`<div>${res[key]}</div>`);
+            }
+            resultHtml += tempHtml.html()
+        }
+        return resultHtml;
     }
 }
 
