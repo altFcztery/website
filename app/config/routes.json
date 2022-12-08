@@ -3,6 +3,7 @@
         "name": "index",
         "route": "/",
         "template": "src/templates/index.html",
+        "controller":"./src/controllers/index.js",
         "perrmissions": null
     }
 ]
