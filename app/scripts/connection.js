@@ -16,19 +16,33 @@ class Conn {
             database: process.env.DB_DATABASE
         }
     }
-    connectionHtml(html) {
-        const HTML = cheerio.load(html);
-        let result = syncSql.mysql(this.conn,this.query)
+    connectionHtml(html) { 
+        let result = syncSql.mysql(this.conn, this.query)
         logger.log(`New database query: "${this.query}"`)
         let resultHtml = "";
         for (const res of result.data.rows) {
-            let tempHtml = HTML;
+            let tempHtml = cheerio.load(html);
             for (const key of Object.keys(res)) {
-                tempHtml(key).replaceWith(`<div>${res[key]}</div>`);
+                tempHtml(`result[key=${key}]`).replaceWith(function () {
+                    return setType(tempHtml(this).attr('type'), res[key]);
+                });
             }
             resultHtml += tempHtml.html()
         }
         return resultHtml;
+    }
+}
+
+function setType(type, value) {
+    value = String(value)
+    switch (type) {
+        case "image":
+            return `<img src='${value}'>`;
+        case "ahref":
+            return `<a href='${value}'></a>`;
+        case "text":
+        default:
+            return value;
     }
 }
 
