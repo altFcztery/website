@@ -1,4 +1,4 @@
-﻿##INSTALL:##
+﻿## INSTALL: ##
 **Requires node.js**
 ***Commands to set up project:*** 
 ```
