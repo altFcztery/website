@@ -2,8 +2,14 @@
     {
         "name": "index",
         "route": "/",
-        "template": "src/templates/index.html",
-        "controller":"./src/controllers/index.js",
-        "perrmissions": null
+        "template": "./src/templates/index.html",
+        "permissions": null
+    },
+    {
+        "name": "login",
+        "route": "/login",
+        "template": "./src/templates/login.html",
+        "controller": "./src/controllers/auth/login.js",
+        "permissions": null
     }
 ]
