@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "website",
   "scripts": {
+    "db-import": "node ./app/setup/import-db.js",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,6 +25,7 @@
     "discord.js": "^14.6.0",
     "dotenv": "^16.0.3",
     "mysql": "^2.18.1",
+    "run-my-sql-file": "^1.0.0",
     "sync-sql": "^1.0.2"
   },
   "devDependencies": {
