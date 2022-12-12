@@ -1,0 +1,17 @@
+{
+    "username": {
+        "minLength": 4,
+        "maxLength": 16,
+        "canDuplicate": true,
+        "canHaveSpaces": false,
+        "includedSpecialChars": [
+            "_"
+        ]
+    },
+    "email": {
+        "canDuplicate": false
+    },
+    "password": {
+        "minLength": 4
+    }
+}

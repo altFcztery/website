@@ -6,10 +6,10 @@
         "permissions": null
     },
     {
-        "name": "login",
-        "route": "/login",
-        "template": "./src/templates/login.html",
-        "controller": "./src/controllers/auth/login.js",
+        "name": "register",
+        "route": "/register",
+        "template": "./src/templates/register.html",
+        "controller": "./src/controllers/auth/register.js",
         "permissions": null
     }
 ]

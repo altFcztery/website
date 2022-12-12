@@ -3,8 +3,9 @@ require('dotenv')
 const cheerio = require('cheerio')
 const path = require('path')
 const fs = require('fs')
+const mysql = require('mysql')
 const { parse } = require('querystring');
-
+const Auth = require(path.join(__dirname, '../../../app/scripts/auth.js'))
 class Controller {
     constructor(request) {
         this.req = request;
@@ -17,12 +18,14 @@ class Controller {
             });
             this.req.on('end', () => {
                 body = parse(body)
-                console.log(
-                    body
-                );
+                if (Object.values(body).every((e) => { return !!e })) {
+                    new Auth.Auth().register(body, (err) => {
+                        if (err) { console.error(err); return }
+                    })
+                }
             });
         }
-        return fs.readFileSync(path.join(__dirname, '../../templates/login.html'))
+        return fs.readFileSync(path.join(__dirname, '../../templates/register.html'))
     }
 }
 
