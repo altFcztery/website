@@ -16,6 +16,7 @@ const ROUTES = JSON.parse(fs.readFileSync(path.join(__dirname, "app/config/route
  * Creating server
  */
 http.createServer((req, res) => {
+    console.log(req)
     let request = url.parse(req.url, true);
     let pathname = request.pathname;
     /**
@@ -60,15 +61,9 @@ http.createServer((req, res) => {
  */
 function prepareHtml(content) {
     const HTML = cheerio.load(content);
-    /**
-     * Rendering components
-     */
     HTML("component").replaceWith(function () {
         return new components.Component(HTML(this).attr("type"), HTML(this).data()).template
     });
-    /**
-     * Database connection
-     */
     HTML("connection").replaceWith(function () {
         return new connection.Conn(HTML(this).attr("query"))
             .connectionHtml(HTML(this).html());

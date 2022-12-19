@@ -27,9 +27,16 @@ class Auth {
         if (formValues.password != formValues.rpassword) err = "Passwords not the same";
         if (!this.checkUsername(formValues.username)) err = "Invalid Username";
         if (!this.checkPassword(formValues.password)) err = "Invalid Password";
-        if (err) { callback(err); return }
-        if (syncSql.mysql(this.conn, `INSERT INTO users (uuid, email, username, password, permissions) VALUES (NULL,'${formValues.email}','${formValues.username}','${formValues.password}','["default"]')`).success)
-            callback(null)
+        if (err) { callback(new Error(err)); return }
+        bcrypt.genSalt(10, (err, salt) => {
+            if (err) { callback(err); return }
+            bcrypt.hash("generic", salt, (err, hash) => {
+                if (err) { callback(err); return }
+                syncSql.mysql(this.conn, `INSERT INTO users (uuid, email, username, password, permissions)
+                 VALUES (NULL,'${formValues.email}','${formValues.username}','${hash}','["default"]')`).success
+                callback(null)
+            });
+        });
     }
 
     login(formValues, callback) {
@@ -40,7 +47,7 @@ class Auth {
 
     checkUsername(username) {
         if (!username.lenBetween(AUTHCONF.username.minLength, AUTHCONF.username.maxLength)) return false;
-        if (!username.match(/[A-Za-z0-9_]+/)) return false;
+        if (hasExcludedChars(username, AUTHCONF.username.includedSpecialChars)) return false;
         if (!AUTHCONF.username.canDuplicate)
             if (this.checkDbForDuplicate("username", username)) return false;
         return true;
@@ -54,6 +61,15 @@ class Auth {
     checkDbForDuplicate(what, value) {
         return Boolean(syncSql.mysql(this.conn, `SELECT 1 FROM users WHERE ${what} = "${value}";`).data.rows[0])
     }
+}
+
+function hasExcludedChars(str, excludeChars) {
+    for (const char of str) {
+        if (!/[a-zA-Z0-9]/.test(char) && !excludeChars.includes(char)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 module.exports = { Auth }

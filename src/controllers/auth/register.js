@@ -3,7 +3,6 @@ require('dotenv')
 const cheerio = require('cheerio')
 const path = require('path')
 const fs = require('fs')
-const mysql = require('mysql')
 const { parse } = require('querystring');
 const Auth = require(path.join(__dirname, '../../../app/scripts/auth.js'))
 class Controller {
