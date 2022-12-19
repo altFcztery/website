@@ -1,6 +1,6 @@
 require('dotenv').config({ path: '.env.local' });
 require('dotenv').config();
-const http = require('http');
+const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
@@ -12,49 +12,45 @@ const connection = require(path.join(__dirname, "app/scripts/connection.js"))
 const logger = new loggerModule.Logger()
 const ROUTES = JSON.parse(fs.readFileSync(path.join(__dirname, "app/config/routes.json")));
 
-/**
- * Creating server
- */
-http.createServer((req, res) => {
-    console.log(req)
+const app = express();
+
+app.get('*', (req, res) => {
+    console.log(req);
     let request = url.parse(req.url, true);
     let pathname = request.pathname;
+
     /**
      * Handling routes
      */
-    let contentType = "text/html";
-    let route = ROUTES.find(e => e.route === pathname);
-    res.writeHead(200, {
-        "Content-Type": getHeaderType(path.extname(pathname))
-    });
+    let contentType = 'text/html';
+    let route = ROUTES.find((e) => e.route === pathname);
+    res.setHeader('Content-Type', getHeaderType(path.extname(pathname)));
     if (!!route) {
-        logger.log("Rendering route: " + route.name);
+        logger.log(`Rendering route: ${route.name}`);
         if (!!route.controller) {
-            const controller = require(path.join(__dirname, route.controller))
-            res.end(prepareHtml(new controller.Controller(req).template))
+            const controller = require(path.join(__dirname, route.controller));
+            res.send(prepareHtml(new controller.Controller(req).template));
             return;
         }
         fs.readFile(route.template, ((err, content) => {
-            res.end(prepareHtml(content));
-        }))
+            res.send(prepareHtml(content));
+        }));
         return;
     }
     /**
      * Serving assets
      */
-    fs.readFile(path.join(__dirname, `./src/${pathname}`),
-        function (err, content) {
-            if (err) {
-                res.writeHead(404, {
-                    "Content-Type": contentType,
-                });
-                res.end("404 Not Found");
-                return;
-            }
-            res.end(content);
-        });
-}).listen(process.env.SERVER_PORT, () => {
-    logger.log('Listening for requests at port: ' + process.env.SERVER_PORT);
+    fs.readFile(path.join(__dirname, `./src/${pathname}`), (err, content) => {
+        if (err) {
+            res.status(404).send('404 Not Found');
+            return;
+        }
+        res.send(content);
+    });
+});
+
+app.listen(process.env.SERVER_PORT, () => {
+    logger.log(`Listening for requests at port: ${process.env.SERVER_PORT}`);
 });
 /**
  * Rendering components and db connections
@@ -75,24 +71,18 @@ function prepareHtml(content) {
  * Setting heders for assets by extension
  */
 function getHeaderType(ext) {
-    switch (ext) {
-        case ".png":
-        case ".jpg":
-            contentType = "image/png";
-            break;
-        case ".css":
-            contentType = "text/css"
-            break;
-        case ".js":
-            contentType = "application/javascript"
-            break;
-        case ".json":
-            contentType = "application/json"
-            break;
-        default:
-            contentType = "text/html"
-    }
-    return contentType;
-}
+    const extensionToContentTypeMap = {
+      '.html': 'text/html',
+      '.css': 'text/css',
+      '.js': 'application/javascript',
+      '.json': 'application/json',
+      '.png': 'image/png',
+      '.jpg': 'image/jpeg',
+      '.gif': 'image/gif',
+      '.ico': 'image/x-icon',
+    };
+  
+    return extensionToContentTypeMap[ext] || 'text/plain';
+  }
 
 require(path.join(__dirname, "./app/scripts/discord"));
